@@ -21,6 +21,8 @@
   --animate-sparkle-fade: sparkleFade 0.8s ease-out forwards;
   --animate-fade-out-welcome: fadeOutWelcome 3s ease-in-out forwards;
   --animate-welcome-scale: welcomeScale 1.5s ease-out forwards;
+  --animate-code-compile: codeCompile 0.6s ease-out forwards;
+  --animate-terminal-blink: terminalBlink 0.8s step-end infinite;
 
   @keyframes letterPop {
     0% { transform: translateY(20px); opacity: 0; }
@@ -84,6 +86,35 @@
     100% { 
       transform: scale(1);
       opacity: 1;
+    }
+  }
+
+  @keyframes codeCompile {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+      filter: blur(10px);
+    }
+    20% {
+      opacity: 0.3;
+    }
+    60% {
+      opacity: 0.7;
+      transform: translateX(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes terminalBlink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
     }
   }
 }

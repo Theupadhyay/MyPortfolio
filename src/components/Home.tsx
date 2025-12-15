@@ -29,7 +29,7 @@ const Home: React.FC = () => {
         const handleMouseMove = (e: MouseEvent) => {
             const newPos = { x: e.clientX, y: e.clientY };
             
-            timeoutId = window.setTimeout(() => {
+            timeoutId = globalThis.setTimeout(() => {
                 
                 const newSparkle: Sparkle = {
                     id: Date.now() + Math.random(),
@@ -47,10 +47,10 @@ const Home: React.FC = () => {
             }, 20);
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
+        globalThis.addEventListener('mousemove', handleMouseMove);
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
+            globalThis.removeEventListener('mousemove', handleMouseMove);
             clearTimeout(timeoutId);
         };
     }, []);
@@ -173,7 +173,7 @@ const Home: React.FC = () => {
                     ))}
             
             {/* Vintage Navbar */}
-            <nav className="sticky top-0 z-50 bg-aged-yellow border-b-[3px] sm:border-b-4 border-ink-black shadow-md">
+            <nav className="sticky top-0 z-50 bg-aged-yellow border-b-[3px] sm:border-b-4 border-ink-black shadow-md" aria-label="Main navigation">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-14 sm:h-16 md:h-20">
                         {/* Logo - Left side (takes less space) */}
@@ -194,9 +194,9 @@ const Home: React.FC = () => {
                             <a href="#projects" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
                                 PROJECT
                             </a>
-                            <a href="#contact" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
+                            <Link to="/contact" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
                                 CONTACT
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -217,8 +217,11 @@ const Home: React.FC = () => {
                         {/* Left Content */}
                         <div className="space-y-10 sm:space-y-12 md:space-y-14 lg:space-y-16 order-2 lg:order-1 max-w-2xl mx-auto lg:mx-0">
                             {/* Java class declaration */}
+                            <div className="font-courier-prime text-xs sm:text-sm text-ink-black/80 mb-4">
+                                <span className="text-stamp-red font-bold">1</span> <span className="text-vintage-green font-bold">public class</span> <span className="text-ink-black font-bold">Developer</span> <span className="text-vintage-green font-bold">{'{'}</span>
+                            </div>
                             <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mb-4">
-                                <span className="text-stamp-red">1</span> <span className="text-vintage-green">public class</span> <span className="text-aged-yellow">Developer</span> <span className="text-vintage-green">{'{'}</span>
+                                <span className="text-stamp-red">2</span> <span className="text-vintage-green"></span> <span className="text-aged-yellow"></span> <span className="text-vintage-green">{}</span>
                             </div>
                             
                             {/* Animated Name */}
@@ -236,8 +239,8 @@ const Home: React.FC = () => {
 
                             {/* Java main method with role */}
                             <div className="relative animate-fade-in-up [animation-delay:0.8s] mb-16 sm:mb-20 md:mb-24 pl-4 sm:pl-6">
-                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mb-2">
-                                    <span className="text-stamp-red">2</span>   <span className="text-vintage-green">public static void</span> <span className="text-aged-yellow">main</span>(<span className="text-vintage-green">String</span>[] args) <span className="text-vintage-green">{'{'}</span>
+                                <div className="font-courier-prime text-xs sm:text-sm text-ink-black/80 mb-2">
+                                    <span className="text-stamp-red font-bold">3</span>   <span className="text-vintage-green font-bold">public static void</span> <span className="text-ink-black font-bold">main</span>(<span className="text-vintage-green font-bold">String</span>[] args) <span className="text-vintage-green font-bold">{'{'}</span>
                                 </div>
                                 <div className="bg-ink-black text-vintage-green px-4 sm:px-5 md:px-6 py-3 sm:py-4 md:py-5 font-courier-prime text-xs sm:text-sm md:text-base lg:text-lg border-[3px] sm:border-4 border-vintage-green shadow-[0_0_20px_rgba(74,93,79,0.3)] inline-block">
                                     <span className="text-aged-yellow">String</span> <span className="text-paper-white">role</span> <span className="text-vintage-green">=</span> <span className="text-stamp-red">"FULL_STACK_DEVELOPER"</span><span className="text-vintage-green">;</span>
@@ -245,53 +248,56 @@ const Home: React.FC = () => {
                                     <span className="text-paper-white">System.out.println</span><span className="text-vintage-green">(</span><span className="text-paper-white">role</span><span className="text-vintage-green">);</span>
                                 </div>
                                 <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mt-2">
-                                    <span className="text-stamp-red">3</span>   <span className="text-vintage-green">{'}'}</span>
+                                    <span className="text-stamp-red">4</span>   <span className="text-vintage-green">{'}'}</span>
                                 </div>
                             </div>
 
                             {/* About section with Java code style */}
-                            <div className="space-y-6 sm:space-y-8 md:space-y-10 animate-fade-in-up [animation-delay:1.3s] mt-16 sm:mt-20 md:mt-24">
+                            <div className="space-y-6 sm:space-y-8 md:space-y-10 animate-fade-in-up [animation-delay:1.3s] mt-16 sm:mt-20 md:mt-24 max-w-4xl">
                                 <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mb-4 pl-4 sm:pl-6">
-                                    <span className="text-stamp-red">4</span> 
+                                    <span className="text-stamp-red">5</span> 
                                 </div>
                                 
                                 {/* Code block style bio with Java syntax */}
-                                <div className="bg-ink-black/5 border-l-4 border-vintage-green p-4 sm:p-5 md:p-6 font-courier-prime space-y-4 sm:space-y-5">
+                                <div className="bg-ink-black/5 border-l-4 border-vintage-green p-4 sm:p-5 md:p-6 lg:p-8 font-courier-prime space-y-4 sm:space-y-5">
                                     <div>
-                                        <span className="text-vintage-green text-xs sm:text-sm">System.out.println(</span>
-                                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-ink-black/90 leading-loose pl-6 sm:pl-8">
+                                        <span className="text-vintage-green text-xs sm:text-sm md:text-base">System.out.println(</span>
+                                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-ink-black/90 leading-relaxed pl-6 sm:pl-8 md:pl-10">
                                             <span className="text-stamp-red text-xs sm:text-sm">"</span>👨‍💻 Passionate developer crafting elegant solutions to complex problems. Specializing in modern web technologies and turning coffee into code since 2018.<span className="text-stamp-red text-xs sm:text-sm">"</span>
                                         </p>
-                                        <span className="text-vintage-green text-xs sm:text-sm">);</span>
+                                        <span className="text-vintage-green text-xs sm:text-sm md:text-base">);</span>
                                     </div>
 
                                     <div>
-                                        <span className="text-vintage-green text-xs sm:text-sm">System.out.println(</span>
-                                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-ink-black/90 leading-loose pl-6 sm:pl-8">
+                                        <span className="text-vintage-green text-xs sm:text-sm md:text-base">System.out.println(</span>
+                                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-ink-black/90 leading-relaxed pl-6 sm:pl-8 md:pl-10">
                                             <span className="text-stamp-red text-xs sm:text-sm">"</span>⚡ I thrive on clean code, performance optimization, and creating exceptional user experiences. When not coding, you'll find me contributing to open-source, mentoring developers, or exploring the latest tech trends.<span className="text-stamp-red text-xs sm:text-sm">"</span>
                                         </p>
-                                        <span className="text-vintage-green text-xs sm:text-sm">);</span>
+                                        <span className="text-vintage-green text-xs sm:text-sm md:text-base">);</span>
                                     </div>
 
                                     <div>
-                                        <span className="text-vintage-green text-xs sm:text-sm">System.out.println(</span>
-                                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-ink-black/90 leading-loose pl-6 sm:pl-8">
+                                        <span className="text-vintage-green text-xs sm:text-sm md:text-base">System.out.println(</span>
+                                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-ink-black/90 leading-relaxed pl-6 sm:pl-8 md:pl-10">
                                             <span className="text-stamp-red text-xs sm:text-sm">"</span>🚀 Let's build something amazing together!<span className="text-stamp-red text-xs sm:text-sm">"</span>
                                         </p>
-                                        <span className="text-vintage-green text-xs sm:text-sm">);</span>
+                                        <span className="text-vintage-green text-xs sm:text-sm md:text-base">);</span>
                                     </div>
                                 </div>
                                 
                                 <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 pl-4 sm:pl-6">
-                                    <span className="text-stamp-red">5</span> 
+                                    <span className="text-stamp-red">6</span> 
                                 </div>
                             </div>
 
                             {/* CTA Buttons with Java method calls */}
                             <div className="animate-fade-in-up [animation-delay:1.8s] pt-8 sm:pt-10 md:pt-12">
-                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mb-4 pl-4 sm:pl-6">
-                                    <span className="text-stamp-red">6</span>   <span className="text-vintage-green">public void</span> <span className="text-aged-yellow">execute</span>() <span className="text-vintage-green">{'{'}</span>
+                                <div className="font-courier-prime text-xs sm:text-sm text-ink-black/80 mb-4 pl-4 sm:pl-6">
+                                    <span className="text-stamp-red font-bold">7</span>   <span className="text-vintage-green font-bold">public void</span> <span className="text-ink-black font-bold">execute</span>() <span className="text-vintage-green font-bold">{'{'}</span>
                                 </div>
+                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mb-4 pl-4 sm:pl-6">
+                                    <span className="text-stamp-red">8</span> 
+                                    </div>
                                 
                                 <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 md:gap-8 max-lg:justify-center pl-8 sm:pl-10">
                                     <a
@@ -300,19 +306,22 @@ const Home: React.FC = () => {
                                     >
                                         <span className="text-vintage-green text-xs mr-2">viewProjects()</span>
                                     </a>
-                                    <a
-                                        href="#contact"
+                                    <Link
+                                        to="/contact"
                                         className="font-courier-prime text-xs sm:text-sm md:text-base text-paper-white bg-stamp-red px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 tracking-wider sm:tracking-widest uppercase border-[2px] sm:border-[3px] border-ink-black shadow-[3px_3px_0_rgba(45,45,45,1)] sm:shadow-[4px_4px_0_rgba(45,45,45,1)] md:shadow-[5px_5px_0_rgba(45,45,45,1)] hover:shadow-[5px_5px_0_rgba(45,45,45,1)] md:hover:shadow-[7px_7px_0_rgba(45,45,45,1)] hover:translate-y-[-2px] transition-all font-bold text-center hover:bg-ink-black"
                                     >
                                         <span className="text-aged-yellow text-xs mr-2">getInTouch()</span>
-                                    </a>
+                                    </Link>
                                 </div>
                                 
                                 <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mt-4 pl-4 sm:pl-6">
-                                    <span className="text-stamp-red">7</span>   <span className="text-vintage-green">{'}'}</span>
+                                    <span className="text-stamp-red">9</span>   
+                                </div>
+                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mt-4 pl-4 sm:pl-6">
+                                    <span className="text-stamp-red">10</span>   <span className="text-vintage-green">{'}'}</span>
                                 </div>
                                 <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mt-4 pl-0">
-                                    <span className="text-stamp-red">8</span> <span className="text-vintage-green">{'}'}</span> <span className="text-vintage-green/70">// End of Developer class</span>
+                                    <span className="text-stamp-red">11</span> <span className="text-vintage-green">{'}'}</span> <span className="text-vintage-green/70">// End of Developer class</span>
                                 </div>
                             </div>
                         </div>
@@ -327,7 +336,7 @@ const Home: React.FC = () => {
                                         <div className="w-full h-full border-[3px] sm:border-4 border-ink-black overflow-hidden">
                                             <img
                                                 src="/image.jpeg"
-                                                alt="Profile"
+                                                alt="Abhishek Upadhyay - Full Stack Developer"
                                                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                                             />
                                         </div>
@@ -353,7 +362,7 @@ const Home: React.FC = () => {
             </section>
 
             {/* Vintage Footer */}
-            <footer className="bg-ink-black text-paper-white border-t-[4px] sm:border-t-[5px] border-aged-yellow py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8">
+            <footer className="bg-ink-black text-paper-white border-t-[4px] sm:border-t-[5px] border-aged-yellow py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8" aria-label="Site footer">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                         {/* Navigation */}
@@ -365,15 +374,15 @@ const Home: React.FC = () => {
                                 <a href="#home" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
                                     &gt; Home
                                 </a>
-                                <a href="#about" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
+                                <Link to="/about" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
                                     &gt; About
-                                </a>
+                                </Link>
                                 <a href="#projects" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
                                     &gt; Projects
                                 </a>
-                                <a href="#contact" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
+                                <Link to="/contact" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
                                     &gt; Contact
-                                </a>
+                                </Link>
                             </nav>
                         </div>
 
@@ -400,13 +409,13 @@ const Home: React.FC = () => {
                                 CONNECT
                             </h3>
                             <div className="flex flex-col space-y-2">
-                                <a href="https://github.com/Theupadhyay" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
+                                <a href="https://github.com/Theupadhyay" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime" aria-label="Visit GitHub profile">
                                     » GitHub
                                 </a>
-                                <a href="https://www.linkedin.com/in/abhishek7upadhyay" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
+                                <a href="https://www.linkedin.com/in/abhishek7upadhyay" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime" aria-label="Visit LinkedIn profile">
                                     » LinkedIn
                                 </a>
-                                <a href="https://x.com/_theupadhyay" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
+                                <a href="https://x.com/_theupadhyay" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime" aria-label="Visit Twitter profile">
                                     » Twitter
                                 </a>
                             </div>
