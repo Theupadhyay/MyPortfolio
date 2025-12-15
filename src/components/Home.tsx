@@ -11,7 +11,17 @@ interface Sparkle {
 
 const Home: React.FC = () => {
     const [sparkles, setSparkles] = useState<Sparkle[]>([]);
+    const [showWelcome, setShowWelcome] = useState(true);
     const colors = ['#D4AF37', '#DC143C', '#2D5016'];
+
+    useEffect(() => {
+        // Hide welcome screen after 3 seconds
+        const welcomeTimer = setTimeout(() => {
+            setShowWelcome(false);
+        }, 3000);
+
+        return () => clearTimeout(welcomeTimer);
+    }, []);
 
     useEffect(() => {
         let timeoutId: number;
@@ -47,36 +57,120 @@ const Home: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-paper-white font-special-elite relative overflow-hidden">
-            {/* Sparkle Trail */}
-            {sparkles.map(sparkle => (
-                <div
-                    key={sparkle.id}
-                    className="fixed pointer-events-none z-[9999] animate-sparkle-fade"
-                    style={{
-                        left: sparkle.x,
-                        top: sparkle.y,
-                        width: sparkle.size,
-                        height: sparkle.size,
-                        transform: 'translate(-50%, -50%)'
-                    }}
-                >
-                    <div
-                        className="w-full h-full rotate-45 animate-spin-slow"
-                        style={{
-                            background: sparkle.color,
-                            boxShadow: `0 0 ${sparkle.size * 2}px ${sparkle.color}, 0 0 ${sparkle.size}px ${sparkle.color}`
-                        }}
-                    />
-                    <div
-                        className="absolute inset-0 rotate-0"
-                        style={{
-                            background: sparkle.color,
-                            clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
-                            filter: `drop-shadow(0 0 ${sparkle.size}px ${sparkle.color})`
-                        }}
-                    />
+            {/* Welcome Screen */}
+            {showWelcome && (
+                <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-gradient-to-br from-paper-white via-aged-yellow/30 to-vintage-green/10 animate-fade-out-welcome overflow-hidden">
+                    {/* Animated Floating Petals */}
+                    <div className="absolute inset-0">
+                        <div className="absolute top-10 left-20 text-3xl opacity-60 animate-image-float">🌺</div>
+                        <div className="absolute top-40 right-32 text-2xl opacity-50 animate-image-float" style={{ animationDelay: '0.5s' }}>🌸</div>
+                        <div className="absolute bottom-32 left-40 text-3xl opacity-60 animate-image-float" style={{ animationDelay: '1s' }}>🌼</div>
+                        <div className="absolute bottom-20 right-20 text-2xl opacity-50 animate-image-float" style={{ animationDelay: '1.5s' }}>🌺</div>
+                        <div className="absolute top-1/2 left-10 text-2xl opacity-40 animate-image-float" style={{ animationDelay: '0.8s' }}>🌸</div>
+                        <div className="absolute top-1/3 right-16 text-3xl opacity-50 animate-image-float" style={{ animationDelay: '1.2s' }}>🌼</div>
+                    </div>
+
+                    {/* Mandala-inspired circular pattern */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-5">
+                        <svg className="w-[800px] h-[800px] animate-spin-slow" viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#e8dcc4" strokeWidth="0.5"/>
+                            <circle cx="100" cy="100" r="60" fill="none" stroke="#4a5d4f" strokeWidth="0.5"/>
+                            <circle cx="100" cy="100" r="40" fill="none" stroke="#8b3a3a" strokeWidth="0.5"/>
+                            <circle cx="100" cy="100" r="20" fill="none" stroke="#2d2d2d" strokeWidth="0.5"/>
+                        </svg>
+                    </div>
+
+                    <div className="text-center animate-welcome-scale relative z-10">
+                        {/* Decorative Diyas arranged in a circle */}
+                        <div className="relative w-64 h-64 mx-auto mb-8">
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 text-4xl animate-icon-blink">🪔</div>
+                            <div className="absolute top-8 right-8 text-4xl animate-icon-blink" style={{ animationDelay: '0.3s' }}>🪔</div>
+                            <div className="absolute bottom-8 right-8 text-4xl animate-icon-blink" style={{ animationDelay: '0.6s' }}>🪔</div>
+                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-4xl animate-icon-blink" style={{ animationDelay: '0.9s' }}>🪔</div>
+                            <div className="absolute bottom-8 left-8 text-4xl animate-icon-blink" style={{ animationDelay: '1.2s' }}>🪔</div>
+                            <div className="absolute top-8 left-8 text-4xl animate-icon-blink" style={{ animationDelay: '1.5s' }}>🪔</div>
+                            
+                            {/* Central Folded Hands */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-7xl sm:text-8xl animate-glow-pulse">
+                                🙏
+                            </div>
+                        </div>
+                        
+                        {/* Main Namaste Text with glow effect */}
+                        <div className="relative mb-8">
+                            <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[12rem] font-bold bg-gradient-to-r from-stamp-red via-aged-yellow to-stamp-red bg-clip-text text-transparent filter drop-shadow-2xl mb-4"
+                                style={{
+                                    textShadow: '0 0 40px rgba(139, 58, 58, 0.3), 0 0 80px rgba(232, 220, 196, 0.2)'
+                                }}>
+                                नमस्ते
+                            </h1>
+                        </div>
+                        
+                        {/* Flowing Wave Decoration */}
+                        <div className="flex items-center justify-center gap-2 mb-6">
+                            <div className="text-stamp-red text-xl">❋</div>
+                            <div className="h-px w-20 bg-gradient-to-r from-transparent via-aged-yellow to-aged-yellow"></div>
+                            <div className="text-vintage-green text-2xl">✺</div>
+                            <div className="h-px w-20 bg-gradient-to-l from-transparent via-aged-yellow to-aged-yellow"></div>
+                            <div className="text-stamp-red text-xl">❋</div>
+                        </div>
+                        
+                        {/* Subtitles with fade in */}
+                        <div className="space-y-2">
+                            <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-vintage-green animate-fade-in-up [animation-delay:0.5s]"
+                               style={{
+                                   textShadow: '0 2px 10px rgba(74, 93, 79, 0.2)'
+                               }}>
+                                स्वागत है
+                            </p>
+                            <p className="text-lg sm:text-xl md:text-2xl text-stamp-red font-courier-prime animate-fade-in-up [animation-delay:0.7s]">
+                                Welcome to My Portfolio
+                            </p>
+                        </div>
+
+                        {/* Bottom decorative pattern */}
+                        <div className="mt-8 flex justify-center gap-3 opacity-60">
+                            <span className="text-aged-yellow text-sm">🕉️</span>
+                            <span className="text-vintage-green text-sm">✦</span>
+                            <span className="text-aged-yellow text-sm">🕉️</span>
+                        </div>
+                    </div>
                 </div>
-            ))}
+            )}
+            
+            {/* Main Content - Hidden during welcome screen */}
+            {!showWelcome && (
+                <>
+                    {/* Sparkle Trail */}
+                    {sparkles.map(sparkle => (
+                        <div
+                            key={sparkle.id}
+                            className="fixed pointer-events-none z-[9999] animate-sparkle-fade"
+                            style={{
+                                left: sparkle.x,
+                                top: sparkle.y,
+                                width: sparkle.size,
+                                height: sparkle.size,
+                                transform: 'translate(-50%, -50%)'
+                            }}
+                        >
+                            <div
+                                className="w-full h-full rotate-45 animate-spin-slow"
+                                style={{
+                                    background: sparkle.color,
+                                    boxShadow: `0 0 ${sparkle.size * 2}px ${sparkle.color}, 0 0 ${sparkle.size}px ${sparkle.color}`
+                                }}
+                            />
+                            <div
+                                className="absolute inset-0 rotate-0"
+                                style={{
+                                    background: sparkle.color,
+                                    clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
+                                    filter: `drop-shadow(0 0 ${sparkle.size}px ${sparkle.color})`
+                                }}
+                            />
+                        </div>
+                    ))}
             
             {/* Vintage Navbar */}
             <nav className="sticky top-0 z-50 bg-aged-yellow border-b-[3px] sm:border-b-4 border-ink-black shadow-md">
@@ -90,17 +184,17 @@ const Home: React.FC = () => {
                         </div>
 
                         {/* Navigation - Right side (takes more than half space) */}
-                        <div className="flex-1 flex justify-end gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20">
-                            <a href="#home" className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red">
+                        <div className="flex-1 flex justify-end gap-3 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-16">
+                            <a href="#home" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-bold text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
                                 HOME
                             </a>
-                            <Link to="/about" className="ml-6 sm:ml-8 md:ml-10 lg:ml-12 text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red">
+                            <Link to="/about" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
                                 ABOUT
                             </Link>
-                            <a href="#projects" className="ml-6 sm:ml-8 md:ml-10 lg:ml-12 text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red">
+                            <a href="#projects" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
                                 PROJECT
                             </a>
-                            <a href="#contact" className="ml-6 sm:ml-8 md:ml-10 lg:ml-12 text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red">
+                            <a href="#contact" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
                                 CONTACT
                             </a>
                         </div>
@@ -110,12 +204,25 @@ const Home: React.FC = () => {
 
             {/* Hero Section */}
             <section className="relative min-h-[calc(100vh-4rem)] flex items-center py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+                {/* Code Editor Window Decoration */}
+                <div className="absolute top-8 left-4 sm:left-8 flex items-center gap-2 opacity-30">
+                    <div className="w-3 h-3 rounded-full bg-stamp-red border border-ink-black"></div>
+                    <div className="w-3 h-3 rounded-full bg-aged-yellow border border-ink-black"></div>
+                    <div className="w-3 h-3 rounded-full bg-vintage-green border border-ink-black"></div>
+                    <span className="ml-3 font-courier-prime text-xs text-ink-black/50">Developer.java</span>
+                </div>
+
                 <div className="max-w-7xl mx-auto w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         {/* Left Content */}
                         <div className="space-y-10 sm:space-y-12 md:space-y-14 lg:space-y-16 order-2 lg:order-1 max-w-2xl mx-auto lg:mx-0">
+                            {/* Java class declaration */}
+                            <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mb-4">
+                                <span className="text-stamp-red">1</span> <span className="text-vintage-green">public class</span> <span className="text-aged-yellow">Developer</span> <span className="text-vintage-green">{'{'}</span>
+                            </div>
+                            
                             {/* Animated Name */}
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-ink-black leading-tight mb-12 sm:mb-14 md:mb-16 whitespace-nowrap">
+                            <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-ink-black leading-tight mb-8 sm:mb-12 md:mb-14 lg:mb-16 whitespace-nowrap pl-4 sm:pl-6">
                                 {['A', 'B', 'H', 'I', 'S', 'H', 'E', 'K', ' ', 'U', 'P', 'A', 'D', 'H', 'Y', 'A', 'Y'].map((letter, index) => (
                                     <span
                                         key={index}
@@ -127,52 +234,86 @@ const Home: React.FC = () => {
                                 ))}
                             </h1>
 
-                            {/* Vintage Terminal-style Designation */}
-                            <div className="relative inline-block animate-fade-in-up [animation-delay:0.8s] mb-16 sm:mb-20 md:mb-24">
-                                <div className="bg-vintage-green text-paper-white px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 font-courier-prime text-xs sm:text-sm md:text-base lg:text-lg border-[3px] sm:border-4 border-ink-black rotate-[-1deg] shadow-[4px_4px_0_rgba(45,45,45,1)] sm:shadow-[5px_5px_0_rgba(45,45,45,1)] md:shadow-[6px_6px_0_rgba(45,45,45,1)]">
-                                    <span className="animate-glow-pulse">&gt;_</span> FULL STACK DEVELOPER
+                            {/* Java main method with role */}
+                            <div className="relative animate-fade-in-up [animation-delay:0.8s] mb-16 sm:mb-20 md:mb-24 pl-4 sm:pl-6">
+                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mb-2">
+                                    <span className="text-stamp-red">2</span>   <span className="text-vintage-green">public static void</span> <span className="text-aged-yellow">main</span>(<span className="text-vintage-green">String</span>[] args) <span className="text-vintage-green">{'{'}</span>
                                 </div>
-                                <p>
-                                    ..
-                                    ..
-                                </p>
-                                {/* Decorative stamp effect */}
-                                <div className="absolute -top-2 sm:-top-3 -right-2 sm:-right-3 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-stamp-red rounded-full border-2 sm:border-[3px] border-paper-white rotate-12" />
+                                <div className="bg-ink-black text-vintage-green px-4 sm:px-5 md:px-6 py-3 sm:py-4 md:py-5 font-courier-prime text-xs sm:text-sm md:text-base lg:text-lg border-[3px] sm:border-4 border-vintage-green shadow-[0_0_20px_rgba(74,93,79,0.3)] inline-block">
+                                    <span className="text-aged-yellow">String</span> <span className="text-paper-white">role</span> <span className="text-vintage-green">=</span> <span className="text-stamp-red">"FULL_STACK_DEVELOPER"</span><span className="text-vintage-green">;</span>
+                                    <br />
+                                    <span className="text-paper-white">System.out.println</span><span className="text-vintage-green">(</span><span className="text-paper-white">role</span><span className="text-vintage-green">);</span>
+                                </div>
+                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mt-2">
+                                    <span className="text-stamp-red">3</span>   <span className="text-vintage-green">{'}'}</span>
+                                </div>
                             </div>
 
-                            {/* About paragraphs with code comment style */}
-                            <div className="space-y-8 sm:space-y-10 md:space-y-12 animate-fade-in-up [animation-delay:1.3s] mt-16 sm:mt-20 md:mt-24">
-                                <div className="font-courier-prime text-xs sm:text-sm md:text-base text-vintage-green font-bold">
-                  // About Me
+                            {/* About section with Java code style */}
+                            <div className="space-y-6 sm:space-y-8 md:space-y-10 animate-fade-in-up [animation-delay:1.3s] mt-16 sm:mt-20 md:mt-24">
+                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mb-4 pl-4 sm:pl-6">
+                                    <span className="text-stamp-red">4</span> 
                                 </div>
                                 
-                                <p className="font-courier-prime text-xs sm:text-sm md:text-base lg:text-lg text-ink-black/80 leading-relaxed pl-4 sm:pl-5 md:pl-6 border-l-[3px] sm:border-l-4 border-aged-yellow/50 max-lg:mx-auto mb-10 sm:mb-12">
-                                    👨‍💻 Passionate developer crafting elegant solutions to complex problems. Specializing in modern web technologies and turning coffee into code since 2018.
-                                </p>
+                                {/* Code block style bio with Java syntax */}
+                                <div className="bg-ink-black/5 border-l-4 border-vintage-green p-4 sm:p-5 md:p-6 font-courier-prime space-y-4 sm:space-y-5">
+                                    <div>
+                                        <span className="text-vintage-green text-xs sm:text-sm">System.out.println(</span>
+                                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-ink-black/90 leading-loose pl-6 sm:pl-8">
+                                            <span className="text-stamp-red text-xs sm:text-sm">"</span>👨‍💻 Passionate developer crafting elegant solutions to complex problems. Specializing in modern web technologies and turning coffee into code since 2018.<span className="text-stamp-red text-xs sm:text-sm">"</span>
+                                        </p>
+                                        <span className="text-vintage-green text-xs sm:text-sm">);</span>
+                                    </div>
 
-                                <p className="font-courier-prime text-xs sm:text-sm md:text-base lg:text-lg text-ink-black/80 leading-relaxed pl-4 sm:pl-5 md:pl-6 border-l-[3px] sm:border-l-4 border-aged-yellow/50 max-lg:mx-auto mb-6 sm:mb-8">
-                                    ⚡ I thrive on clean code, performance optimization, and creating exceptional user experiences. When not coding, you'll find me contributing to open-source, mentoring developers, or exploring the latest tech trends.
-                                </p>
+                                    <div>
+                                        <span className="text-vintage-green text-xs sm:text-sm">System.out.println(</span>
+                                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-ink-black/90 leading-loose pl-6 sm:pl-8">
+                                            <span className="text-stamp-red text-xs sm:text-sm">"</span>⚡ I thrive on clean code, performance optimization, and creating exceptional user experiences. When not coding, you'll find me contributing to open-source, mentoring developers, or exploring the latest tech trends.<span className="text-stamp-red text-xs sm:text-sm">"</span>
+                                        </p>
+                                        <span className="text-vintage-green text-xs sm:text-sm">);</span>
+                                    </div>
 
-                                <p className="font-courier-prime text-xs sm:text-sm md:text-base lg:text-lg text-ink-black/80 leading-relaxed pl-4 sm:pl-5 md:pl-6 border-l-[3px] sm:border-l-4 border-aged-yellow/50 max-lg:mx-auto mb-6 sm:mb-8">
-                                    🚀 Let's build something amazing together!
-                                </p>
+                                    <div>
+                                        <span className="text-vintage-green text-xs sm:text-sm">System.out.println(</span>
+                                        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-ink-black/90 leading-loose pl-6 sm:pl-8">
+                                            <span className="text-stamp-red text-xs sm:text-sm">"</span>🚀 Let's build something amazing together!<span className="text-stamp-red text-xs sm:text-sm">"</span>
+                                        </p>
+                                        <span className="text-vintage-green text-xs sm:text-sm">);</span>
+                                    </div>
+                                </div>
+                                
+                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 pl-4 sm:pl-6">
+                                    <span className="text-stamp-red">5</span> 
+                                </div>
                             </div>
 
-                            {/* CTA Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 md:gap-8 animate-fade-in-up [animation-delay:1.8s] pt-8 sm:pt-10 md:pt-12 max-lg:justify-center">
-                                <a
-                                    href="#projects"
-                                    className="font-courier-prime text-xs sm:text-sm md:text-base text-vintage-green bg-aged-yellow px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 tracking-wider sm:tracking-widest uppercase border-[2px] sm:border-[3px] border-ink-black shadow-[3px_3px_0_rgba(45,45,45,1)] sm:shadow-[4px_4px_0_rgba(45,45,45,1)] md:shadow-[5px_5px_0_rgba(45,45,45,1)] hover:shadow-[5px_5px_0_rgba(45,45,45,1)] md:hover:shadow-[7px_7px_0_rgba(45,45,45,1)] hover:translate-y-[-2px] transition-all font-bold text-center"
-                                >
-                                    View Projects
-                                </a>
-                                <a
-                                    href="#contact"
-                                    className="font-courier-prime text-xs sm:text-sm md:text-base text-paper-white bg-stamp-red px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 tracking-wider sm:tracking-widest uppercase border-[2px] sm:border-[3px] border-ink-black shadow-[3px_3px_0_rgba(45,45,45,1)] sm:shadow-[4px_4px_0_rgba(45,45,45,1)] md:shadow-[5px_5px_0_rgba(45,45,45,1)] hover:shadow-[5px_5px_0_rgba(45,45,45,1)] md:hover:shadow-[7px_7px_0_rgba(45,45,45,1)] hover:translate-y-[-2px] transition-all font-bold text-center"
-                                >
-                                    Get in Touch
-                                </a>
+                            {/* CTA Buttons with Java method calls */}
+                            <div className="animate-fade-in-up [animation-delay:1.8s] pt-8 sm:pt-10 md:pt-12">
+                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mb-4 pl-4 sm:pl-6">
+                                    <span className="text-stamp-red">6</span>   <span className="text-vintage-green">public void</span> <span className="text-aged-yellow">execute</span>() <span className="text-vintage-green">{'{'}</span>
+                                </div>
+                                
+                                <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 md:gap-8 max-lg:justify-center pl-8 sm:pl-10">
+                                    <a
+                                        href="#projects"
+                                        className="font-courier-prime text-xs sm:text-sm md:text-base text-ink-black bg-aged-yellow px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 tracking-wider sm:tracking-widest uppercase border-[2px] sm:border-[3px] border-ink-black shadow-[3px_3px_0_rgba(45,45,45,1)] sm:shadow-[4px_4px_0_rgba(45,45,45,1)] md:shadow-[5px_5px_0_rgba(45,45,45,1)] hover:shadow-[5px_5px_0_rgba(45,45,45,1)] md:hover:shadow-[7px_7px_0_rgba(45,45,45,1)] hover:translate-y-[-2px] transition-all font-bold text-center hover:bg-vintage-green hover:text-paper-white"
+                                    >
+                                        <span className="text-vintage-green text-xs mr-2">viewProjects()</span>
+                                    </a>
+                                    <a
+                                        href="#contact"
+                                        className="font-courier-prime text-xs sm:text-sm md:text-base text-paper-white bg-stamp-red px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 tracking-wider sm:tracking-widest uppercase border-[2px] sm:border-[3px] border-ink-black shadow-[3px_3px_0_rgba(45,45,45,1)] sm:shadow-[4px_4px_0_rgba(45,45,45,1)] md:shadow-[5px_5px_0_rgba(45,45,45,1)] hover:shadow-[5px_5px_0_rgba(45,45,45,1)] md:hover:shadow-[7px_7px_0_rgba(45,45,45,1)] hover:translate-y-[-2px] transition-all font-bold text-center hover:bg-ink-black"
+                                    >
+                                        <span className="text-aged-yellow text-xs mr-2">getInTouch()</span>
+                                    </a>
+                                </div>
+                                
+                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mt-4 pl-4 sm:pl-6">
+                                    <span className="text-stamp-red">7</span>   <span className="text-vintage-green">{'}'}</span>
+                                </div>
+                                <div className="font-courier-prime text-xs sm:text-sm text-vintage-green/60 mt-4 pl-0">
+                                    <span className="text-stamp-red">8</span> <span className="text-vintage-green">{'}'}</span> <span className="text-vintage-green/70">// End of Developer class</span>
+                                </div>
                             </div>
                         </div>
 
@@ -293,6 +434,8 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </footer>
+                </>
+            )}
         </div>
     );
 };
