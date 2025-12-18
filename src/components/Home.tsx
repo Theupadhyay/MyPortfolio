@@ -191,7 +191,7 @@ const Home: React.FC = () => {
                             <Link to="/about" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
                                 ABOUT
                             </Link>
-                            <a href="#projects" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
+                            <a href="/projects" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
                                 PROJECT
                             </a>
                             <Link to="/contact" className="text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-ink-black hover:text-stamp-red transition-colors border-b-2 border-transparent hover:border-stamp-red hover:scale-105">
@@ -377,9 +377,9 @@ const Home: React.FC = () => {
                                 <Link to="/about" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
                                     &gt; About
                                 </Link>
-                                <a href="#projects" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
+                                <Link to="/projects" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
                                     &gt; Projects
-                                </a>
+                                </Link>
                                 <Link to="/contact" className="text-xs sm:text-sm md:text-base text-paper-white/80 hover:text-aged-yellow transition-colors font-courier-prime">
                                     &gt; Contact
                                 </Link>
