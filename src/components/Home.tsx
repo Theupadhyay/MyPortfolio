@@ -335,7 +335,7 @@ const Home: React.FC = () => {
                                     <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 border-[6px] sm:border-[8px] md:border-[10px] border-aged-yellow bg-aged-yellow p-2 sm:p-3 md:p-4 shadow-[8px_8px_0_rgba(45,45,45,0.3)] sm:shadow-[10px_10px_0_rgba(45,45,45,0.3)] md:shadow-[12px_12px_0_rgba(45,45,45,0.3)] rotate-2 hover:rotate-0 transition-transform duration-300">
                                         <div className="w-full h-full border-[3px] sm:border-4 border-ink-black overflow-hidden">
                                             <img
-                                                src="/image.jpeg"
+                                                src="/image.jpg"
                                                 alt="Abhishek Upadhyay - Full Stack Developer"
                                                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                                             />
