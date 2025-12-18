@@ -301,7 +301,7 @@ const Home: React.FC = () => {
                                 
                                 <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 md:gap-8 max-lg:justify-center pl-8 sm:pl-10">
                                     <a
-                                        href="#projects"
+                                        href="/projects"
                                         className="font-courier-prime text-xs sm:text-sm md:text-base text-ink-black bg-aged-yellow px-4 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 tracking-wider sm:tracking-widest uppercase border-[2px] sm:border-[3px] border-ink-black shadow-[3px_3px_0_rgba(45,45,45,1)] sm:shadow-[4px_4px_0_rgba(45,45,45,1)] md:shadow-[5px_5px_0_rgba(45,45,45,1)] hover:shadow-[5px_5px_0_rgba(45,45,45,1)] md:hover:shadow-[7px_7px_0_rgba(45,45,45,1)] hover:translate-y-[-2px] transition-all font-bold text-center hover:bg-vintage-green hover:text-paper-white"
                                     >
                                         <span className="text-vintage-green text-xs mr-2">viewProjects()</span>
